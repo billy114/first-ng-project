@@ -1,0 +1,37 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 px-4">
+      <div class="card p-4 shadow-sm mb-4">
+        <h5 class="mb-3">Afficher une donnée (Data Binding)</h5>
+        <p class="text-primary">{{ message }}</p>
+        <p class="text-primary">{{ getMessage() }}</p>
+      </div>
+
+      <div class="card p-4 shadow-sm mb-4">
+        <h5 class="mb-3">Property Binding</h5>
+        <img [src]="imageUrl" class="img-fluid rounded border mb-3">
+        <button class="btn btn-success" [disabled]="condition">Valider</button>
+      </div>
+    </div>
+
+    <div class="col-md-6 px-4">
+      <div class="card p-4 shadow-sm mb-4">
+        <h5 class="mb-3">Event Binding</h5>
+        <button class="btn btn-success mb-3" (click)="onAlert()">Alert</button>
+        <input type="text" class="form-control" (keyup)="onKeyUp($event)">
+      </div>
+
+      <div class="card p-4 shadow-sm mb-4">
+        <h5 class="mb-3">Two-Way Binding</h5>
+        <input type="text" class="form-control mb-2" [(ngModel)]="username">
+        <p class="mt-2">Cette valeur vient du TS : <span class="fw-bold">{{ username }}</span></p>
+      </div>
+
+      <div class="card p-4 shadow-sm">
+        <h5 class="mb-3">Exo</h5>
+        <input type="text" class="form-control mb-2" [(ngModel)]="prenom" >
+        <p class="mt-2"><span class="fw-bold"> {{devinePrenom()}}</span></p>
+      </div>
+    </div>
+  </div>
+</div>

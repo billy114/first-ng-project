@@ -1,0 +1,10 @@
+<p>Contacts sélectionnés : {{contactSelectionnesCpt}}</p>
+<div class="container">
+  <div class="row">
+      @for (contact of contactData; track contact.id){
+        <div class="col-4">
+          <app-contact (contactCheckEvent)="updateCpt($event)"  [contact]="contact"></app-contact>
+        </div>
+      }
+  </div>
+</div>

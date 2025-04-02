@@ -1,0 +1,18 @@
+  <div class="card mb-3">
+    <div class="card-body">
+      <a [routerLink]="['..', 'contact', contact.name]">
+        <p> name : {{contact.name}}</p>
+      </a>
+
+      <p>designation : {{contact.designation}}</p>
+
+      projects :
+      <ul>
+        @for (project of contact.projects; track project){
+          <li>{{project}}</li>
+        }
+      </ul>
+      <p>email : {{contact.email}}</p>
+      <input type="checkbox" (change)="onChange()" [(ngModel)]="isChecked">
+    </div>
+  </div>

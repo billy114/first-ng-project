@@ -1,0 +1,20 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 px-4">
+      <div class="card p-4 shadow-sm mb-4">
+        <label>name</label>
+        <input type="text" class="mb-2" [(ngModel)]="nameInput">
+        <label>age</label>
+        <input type="number" class="mb-2" [(ngModel)]="ageInput">
+        <button class="btn btn-primary" [disabled]="!isFormValid()" (click)="onSubmit()">valider</button>
+      </div>
+    </div>
+
+    <div class="col-md-6 px-4">
+      <div class="card p-4 shadow-sm mb-4">
+        <p>name : {{name}}</p>
+        <p>age : {{age}}</p>
+      </div>
+    </div>
+  </div>
+</div>

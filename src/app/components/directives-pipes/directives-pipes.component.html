@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="col px-5">
+      <p class="fs-4">ngIf</p>
+      @if (true){
+        <div>
+          Hello !!
+        </div>
+      }
+
+      <hr>
+      <p class="fs-4">ngFor</p>
+      @for (ville of villes; track identity) {
+        <p>{{ville}}</p>
+      }
+
+      <hr>
+      <p class="fs-4">ngSwich</p>
+      <button class="btn btn-sm btn-primary me-2" (click)="changeView('home')">Home</button>
+      <button class="btn btn-sm btn-primary me-2" (click)="changeView('about')">About</button>
+      <button class="btn btn-sm btn-primary me-2" (click)="changeView('contact')">Contact</button>
+      <button class="btn btn-sm btn-primary me-2" (click)="changeView('other')">Other</button>
+
+      @switch (view){
+        @case ('home'){
+          <div class="card mt-3 p-3">Home</div>
+        }
+        @case ('about'){
+          <div class="card mt-3 p-3">about</div>
+        }
+        @case ('contact'){
+          <div class="card mt-3 p-3">Contact</div>
+        }
+        @default {
+          <div class="card mt-3 p-3">Content not found !</div>
+        }
+      }
+    </div>
+
+    <div class="col px-5">
+      <p class="fs-4">ngClass</p>
+
+      <div class="d-flex flex-column">
+        @for (tache of taches; track identity){
+          <div class="d-flex">
+            <p class="me-3">{{tache.name}}</p>
+            <div class="badge mb-3"
+                 [ngClass]="{'bg-success' : tache.status === 'finished',
+            'bg-warning' : tache.status === 'pending'}"
+            >{{tache.status}}</div>
+          </div>
+        }
+      </div>
+
+
+    </div>
+
+
+  </div>
+</div>
