@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import {RouterLink} from '@angular/router';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {Router, RouterLink} from '@angular/router';
+import {FirstServiceService} from '../../core/services/first-service.service';
 
 @Component({
   selector: 'app-home',
@@ -11,5 +12,20 @@ import {RouterLink} from '@angular/router';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+
+  constructor(
+    private router: Router,
+    private firstService : FirstServiceService
+  ) {}
+  
+  navigateTo(path : string){
+    setTimeout(()=>{
+      this.router.navigate([path]);
+    },1000)
+
+  }
+
+
+
 
 }

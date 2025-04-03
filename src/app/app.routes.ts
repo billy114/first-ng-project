@@ -7,6 +7,7 @@ import {ContactPageComponent} from './pages/contact-page/contact-page.component'
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
 import {DataComponent} from './admin/pages/data/data.component';
 import {DashboardComponent} from './admin/pages/dashboard/dashboard.component';
+import {ServicesComponent} from './pages/services/services.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,5 +20,7 @@ export const routes: Routes = [
         {path : 'data', component: DataComponent},
         {path : 'dashboard', component : DashboardComponent}
       ]
-  }
+  },
+  { path: 'services', component: ServicesComponent },
+
 ];

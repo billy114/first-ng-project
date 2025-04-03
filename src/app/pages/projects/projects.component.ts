@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {ProjectComponent} from '../../components/project/project.component';
 import {RouterLink} from '@angular/router';
+import {ProjectService} from '../../core/services/project.service';
 
 @Component({
   selector: 'app-projects',
@@ -125,8 +126,14 @@ export class ProjectsComponent {
     }
   ];
 
+  constructor(private projectService: ProjectService) { }
+
   changeStatus(status :string) : void {
     this.status = status;
+  }
+
+  getCompletedProjectsCount() : number {
+    return this.projectService.countCompletedProjects(this.projectData)
   }
 
 }

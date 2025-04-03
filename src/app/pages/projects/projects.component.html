@@ -6,6 +6,9 @@
       <button class="btn btn-sm btn-danger me-2" (click)="changeStatus('Delay')">Delay</button>
       <button class="btn btn-sm btn-secondary me-2" (click)="changeStatus('All')">All</button>
     </div>
+    <div class="mb-3">
+      Nombre de projets finis est : {{getCompletedProjectsCount()}}
+    </div>
     @for (project of projectData; track project.id) {
       @if (status === project.status || status === 'All')  {
         <div class="col-4">
