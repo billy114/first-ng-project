@@ -8,6 +8,7 @@ import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.componen
 import {DataComponent} from './admin/pages/data/data.component';
 import {DashboardComponent} from './admin/pages/dashboard/dashboard.component';
 import {ServicesComponent} from './pages/services/services.component';
+import {PostsComponent} from './pages/posts/posts.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,5 +23,6 @@ export const routes: Routes = [
       ]
   },
   { path: 'services', component: ServicesComponent },
+  { path: 'posts', component: PostsComponent },
 
 ];

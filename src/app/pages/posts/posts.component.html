@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      @for (post of posts; track post.id) {
+        <p> title : {{post.title}}</p>
+        <p> body : {{post.body}}</p>
+        <hr>
+      }
+    </div>
+  </div>
+</div>
