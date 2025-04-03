@@ -1,0 +1,57 @@
+<div class="container py-5">
+  <label class="mb-2">name</label>
+  <input type="text" class="form-control mb-3" [formControl]="name">
+<!--  @if (name.errors){-->
+<!--    <p class="text-danger">le champs et invalid</p>-->
+<!--    @if (name.errors?.['required']){-->
+<!--      <p class="text-danger">required</p>-->
+<!--    }-->
+<!--  }-->
+
+  <label class="mb-2">email</label>
+  <input type="email" class="form-control" [formControl]="email"
+  [ngClass]="{'is-invalid' : email.invalid && email.touched}">
+
+  @if (email.errors && email.touched){
+    <div class="invalid-feedback">
+      @if (email.errors?.['required']){
+        <p>required</p>
+      }
+      @if (email.errors?.['email']){
+        <p>email is invalid</p>
+      }
+    </div>
+  }
+
+  <label class="mb-2">password</label>
+  <input type="password" class="form-control" [formControl]="password"
+         [ngClass]="{'is-invalid' : (password.invalid || !isMatched()) && password.touched}">
+
+  @if (password.errors && password.touched){
+    <div class="invalid-feedback">
+      @if (password.errors?.['required']){
+        <p>required</p>
+      }
+      @if (password.errors?.['pattern']){
+        <p>password doit êtres ...</p>
+      }
+    </div>
+  }
+
+  <label class="mb-2">password confirmation</label>
+  <input type="password" class="form-control" [formControl]="confPassword"
+         [ngClass]="{'is-invalid' : (confPassword.invalid || !isMatched()) && confPassword.touched}">
+
+  @if (confPassword.errors && confPassword.touched){
+    <div class="invalid-feedback">
+      @if (email.errors?.['required']){
+        <p>required</p>
+      }
+    </div>
+  }
+  @if (!isMatched()) {
+    <div class="invalid-feedback">
+      <p>les 2 mdp doivent etre identique</p>
+    </div>
+  }
+</div>
