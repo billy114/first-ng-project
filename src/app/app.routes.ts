@@ -10,6 +10,9 @@ import {DashboardComponent} from './admin/pages/dashboard/dashboard.component';
 import {ServicesComponent} from './pages/services/services.component';
 import {PostsComponent} from './pages/posts/posts.component';
 import {ReactiveFormsComponent} from './pages/reactive-forms/reactive-forms.component';
+import {LoginComponent} from './pages/login/login.component';
+import {UserProfilComponent} from './pages/user-profil/user-profil.component';
+import {authGuard} from './core/guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,5 +29,7 @@ export const routes: Routes = [
   { path: 'services', component: ServicesComponent },
   { path: 'posts', component: PostsComponent },
   { path: 'reactive-forms', component: ReactiveFormsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'user-profil',canActivate: [authGuard],  component: UserProfilComponent },
 
 ];

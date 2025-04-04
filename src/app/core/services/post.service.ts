@@ -15,4 +15,5 @@ export class PostService {
     return this.http.get<Array<Post>>(this.apiUrl+'posts');
   }
 
+
 }
