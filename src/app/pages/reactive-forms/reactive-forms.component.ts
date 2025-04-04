@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgClass} from '@angular/common';
 
 @Component({
@@ -26,6 +26,12 @@ export class ReactiveFormsComponent {
     ])
   })
 
+  submit : boolean = false;
+
+  get name() : FormControl {
+    return this.formTest.controls['name'] as FormControl;
+  }
+
   get languages() : FormArray<FormControl<string | null>>{
     return this.formTest.controls['languages'] as FormArray<FormControl<string | null>>;
   }
@@ -47,14 +53,19 @@ export class ReactiveFormsComponent {
   }
 
   addLanguageInput() : void{
-    this.languages.controls.push(new FormControl('', Validators.required));
+    this.languages.push(new FormControl('', Validators.required));
   }
 
   removeLanguageInput(index : number){
-      this.languages.controls.splice(index, 1);
+    this.languages.removeAt(index);
   }
 
   onSubmit(){
-    console.log(this.formTest.value);
+    if (this.formTest.invalid) {
+      this.submit = true;
+    }
+    else {
+      console.log(this.formTest.value);
+    }
   }
 }

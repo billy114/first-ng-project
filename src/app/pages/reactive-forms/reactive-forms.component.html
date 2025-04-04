@@ -1,82 +1,107 @@
 <div class="container py-5">
-  <form [formGroup]="formTest" (ngSubmit)="onSubmit()" >
-    <label class="mb-2">name</label>
-    <input type="text" class="form-control mb-3" formControlName="name">
-    @if (formTest.controls['name'].errors){
-      <p class="text-danger">le champs et invalid</p>
-      @if (formTest.controls['name'].errors?.['required']){
-        <p class="text-danger">required</p>
-      }
-    }
-
-    <label class="mb-2">email</label>
-    <input type="email" class="form-control" formControlName="email"
-           [ngClass]="{'is-invalid' : email.invalid && email.dirty}">
-
-    @if (email.errors && email.dirty){
-      <div class="invalid-feedback">
-        @if (email.errors['required']){
-          <p>required</p>
-        }
-        @if (email.errors['email']){
-          <p>email is invalid</p>
-        }
-      </div>
-    }
-
-    <label class="mb-2">password</label>
-    <input type="password" class="form-control" formControlName="password"
-           [ngClass]="{'is-invalid' : (password.invalid || !isMatched()) && password.touched}">
-
-    @if (password.errors && password.touched){
-      <div class="invalid-feedback">
-        @if (password.errors['required']){
-          <p>required</p>
-        }
-        @if (password.errors['pattern']){
-          <p>password doit êtres ...</p>
-        }
-      </div>
-    }
-
-    <label class="mb-2">password confirmation</label>
-    <input type="password" class="form-control mb-5" formControlName="confPassword"
-           [ngClass]="{'is-invalid' : (confPassword.invalid || !isMatched()) && confPassword.touched}">
-    <hr>
-    @if (confPassword.errors && confPassword.dirty){
-      <div class="invalid-feedback">
-        @if (confPassword.errors['required']){
-          <p>required</p>
-        }
-      </div>
-    }
-    @if (!isMatched()) {
-      <div class="invalid-feedback">
-        <p>les 2 mdp doivent etre identique</p>
-      </div>
-    }
-
-    <label class="mb-2">language de programmations : </label>
-    <div formArrayName="languages">
-      @for (language of languages.controls; track i; let i = $index) {
-        <div class="d-flex flex-row gap-3">
-          <div class="d-flex flex-column">
-            <input class="form-control mb-3"  type="text" [formControlName]="i" placeholder="language {{i + 1}} :"
-                   [ngClass]="{'is-invalid' : (language.invalid) && language.dirty}">
-            @if (language.errors && language.dirty){
-              <div class="invalid-feedback">
-                @if (language.errors['required']){
-                  <p>required</p>
-                }
-              </div>
-            }
+  <p class="fs-2">Formulaire de test</p>
+  <form [formGroup]="formTest" (ngSubmit)="onSubmit()">
+    <!-- NAME -->
+    <div class="mb-3">
+      <label class="form-label">Nom</label>
+      <input type="text"
+             class="form-control"
+             formControlName="name"
+             [ngClass]="{'is-invalid' : name.invalid && (name.dirty || submit)}">
+      @if (name.errors && (name.dirty || submit)) {
+        @if (name.errors['required']) {
+          <div class="invalid-feedback">
+            <div class="form-text text-danger">Champ requis</div>
           </div>
-          <button class="btn btn-danger" (click)="removeLanguageInput(i)">X</button>
+        }
+      }
+    </div>
+
+    <!-- EMAIL -->
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email"
+             class="form-control"
+             formControlName="email"
+             [ngClass]="{'is-invalid' : email.invalid && (email.dirty || submit)}">
+      @if (email.errors && (email.dirty || submit)) {
+        <div class="invalid-feedback">
+          @if (email.errors?.['required']) {
+            <p>Champ requis</p>
+          }
+          @if (email.errors?.['email']) {
+            <p>Email invalide</p>
+          }
         </div>
       }
     </div>
 
-    <button class="btn btn-primary" (click)="addLanguageInput()">add language</button>
-    <button type="submit">valider</button>
+    <!-- PASSWORD -->
+    <div class="mb-3">
+      <label class="form-label">Mot de passe</label>
+      <input type="password"
+             class="form-control"
+             formControlName="password"
+             [ngClass]="{'is-invalid' : (password.invalid || !isMatched()) && (password.dirty || submit)}">
+      @if (password.errors && (password.dirty || submit)) {
+        <div class="invalid-feedback">
+          @if (password.errors['required']) {
+            <p>Champ requis</p>
+          }
+          @if (password.errors['pattern']) {
+            <p>Le mot de passe doit respecter le format requis</p>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- PASSWORD CONFIRMATION -->
+    <div class="mb-3">
+      <label class="form-label">Confirmation du mot de passe</label>
+      <input type="password"
+             class="form-control"
+             formControlName="confPassword"
+             [ngClass]="{'is-invalid' : (confPassword.invalid || !isMatched()) && (confPassword.dirty || submit)}">
+      @if (confPassword.errors && confPassword.dirty) {
+        <div class="invalid-feedback">
+          @if (confPassword.errors['required']) {
+            <p>Champ requis</p>
+          }
+        </div>
+      }
+      @if (!isMatched()) {
+        <div class="invalid-feedback d-block">
+          <p>Les deux mots de passe doivent être identiques</p>
+        </div>
+      }
+    </div>
+
+    <!-- LANGUAGES -->
+    <div class="mb-3">
+      <label class="form-label">Langages de programmation</label>
+      <div formArrayName="languages">
+        @for (language of languages.controls; track language; let i = $index) {
+          <div class="input-group mb-2">
+            <input class="form-control"
+                   type="text"
+                   [formControlName]="i"
+                   placeholder="Langage {{i + 1}}"
+                   [ngClass]="{'is-invalid' : language.invalid && (language.dirty || submit)}">
+            <button class="btn btn-outline-danger" type="button" (click)="removeLanguageInput(i)">X</button>
+            @if (language.errors && (language.dirty ||submit)) {
+              <div class="invalid-feedback d-block">
+                @if (language.errors['required']) {
+                  <p>Champ requis</p>
+                }
+              </div>
+            }
+          </div>
+        }
+      </div>
+      <button class="btn btn-outline-primary mt-2" type="button" (click)="addLanguageInput()">Ajouter un langage</button>
+    </div>
+
+    <!-- SUBMIT -->
+    <button class="btn btn-success mt-4" type="submit">Valider</button>
   </form>
 </div>
